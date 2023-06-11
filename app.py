@@ -293,6 +293,7 @@ def create_event():
 
 # #     return render_template('dashboard.html')
 
+
 # # if _name_ == "_main_":
 # #     with app.app_context():
 # #         db.create_all()

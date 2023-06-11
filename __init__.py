@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -32,5 +33,5 @@ def create_app():
     # blueprint for non-auth parts of app
     from .app import app as main_blueprint
     app.register_blueprint(main_blueprint)
-
+    
     return app
