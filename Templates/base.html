@@ -54,13 +54,13 @@
         <a href="{{ url_for('auth.login') }}" class="btn btn-primary text-slate-100">
             Login
         </a>
-        <a href="{{ url_for('auth.signup') }}" class="btn btn-primary text-slate-100">
+        <!--a href="{{ url_for('auth.signup') }}" class="btn btn-primary text-slate-100">
             Sign Up
-        </a>
+        </a-->
         {% endif %}
         {% if current_user.is_authenticated %}
         <a href="{{ url_for('auth.logout') }}" class="btn btn-primary text-slate-100">
-            Logout
+            Login
         </a>
         {% endif %}
       </div>
@@ -70,9 +70,7 @@
                {% endblock %}
 
     </section>
-    <footer style="text-align: center; margin-bottom: 20px; color: #fff;">
-        &copy; 2023 All rights reserved by Microsoft Innovation Club Vit Chennai
-      </footer>
 </body>
-
 </html>
+
+

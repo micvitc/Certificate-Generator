@@ -15,7 +15,11 @@ def index():
 @login_required
 
 def profile():
-    return render_template('dashboard.html', name=current_user.username)
+    return render_template('landing.html', name=current_user.username)
+
+@app.route('/dashboard/')
+def dash():
+    return render_template('dashboard.html')
 
 @app.route('/create_event', methods=['POST'])
 @login_required
@@ -288,6 +292,7 @@ def create_event():
 # #         return redirect('/landing/')
 
 # #     return render_template('dashboard.html')
+
 
 # # if _name_ == "_main_":
 # #     with app.app_context():

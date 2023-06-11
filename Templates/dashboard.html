@@ -1,49 +1,98 @@
-{% extends "base.html"%}
-{% block content%}
+{% extends "base.html"%} {% block content%}
 <body class="bg-gray-800 text-white min-h-screen">
   <div class="container mx-auto px-2 py-4">
-    <h1 class="">
-      Welcome, {{ name }}!
-    </h1>
     <h2 class="text-center text-3xl font-semibold mb-6">CREATE NEW EVENT</h2>
     <form action="/create_event" method="POST">
       <div class="mb-6">
-        <label for="event_name" class="block font-semibold mb-2">Event Name:</label>
-        <input type="text" id="event_name" name="event_name" required class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white">
-      </div>
-            
-      <div class="mb-6">
-        <label for="brandings" class="block font-semibold mb-2">Brandings:</label>
-        <input type="text" id="brandings" name="brandings" required class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white">
+        <label for="event_name" class="block font-semibold mb-2"
+          >Event Name:</label
+        >
+        <input
+          type="text"
+          id="event_name"
+          name="event_name"
+          required
+          class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white"
+        />
       </div>
 
       <div class="mb-6">
-        <label for="authorized_signatory" class="block font-semibold mb-2">Authorized Signatory:</label>
-        <input type="file" id="authorized_signatory" name="authorized_signatory" required class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white">
-      </div>              
+        <label for="brandings" class="block font-semibold mb-2"
+          >Brandings:</label
+        >
+        <input
+          type="text"
+          id="brandings"
+          name="brandings"
+          required
+          class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white"
+        />
+      </div>
 
       <div class="mb-6">
-        <label for="participants" class="block font-semibold mb-2">Participants:</label>
+        <label for="authorized_signatory" class="block font-semibold mb-2"
+          >Authorized Signatory:</label
+        >
+        <input
+          type="file"
+          id="authorized_signatory"
+          name="authorized_signatory"
+          required
+          class="w-full px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label for="participants" class="block font-semibold mb-2"
+          >Participants:</label
+        >
         <div id="participants-inputs">
           <div class="flex items-center">
-            <input type="text" name="participants" required class="flex-1 px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white">
-            <button type="button" onclick="addInputField('participants')" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">+</button>
+            <input
+              type="text"
+              name="participants"
+              required
+              class="flex-1 px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white"
+            />
+            <button
+              type="button"
+              onclick="addInputField('participants')"
+              class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
-            
+
       <div class="mb-6">
         <label for="winners" class="block font-semibold mb-2">Winners:</label>
         <div id="winners-inputs">
           <div class="flex items-center">
-            <input type="text" name="winners" required class="flex-1 px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white">
-            <button type="button" onclick="addInputField('winners')" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">+</button>
+            <input
+              type="text"
+              name="winners"
+              required
+              class="flex-1 px-4 py-2 border rounded transition duration-300 focus:border-blue-500 bg-black text-white"
+            />
+            <button
+              type="button"
+              onclick="addInputField('winners')"
+              class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
 
       <div class="mb-6">
-        <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 font-semibold uppercase tracking-wide">CREATE</button>
+        <button
+          type="submit"
+          class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 font-semibold uppercase tracking-wide"
+        >
+          CREATE
+        </button>
       </div>
     </form>
   </div>
@@ -51,40 +100,71 @@
   <script>
     function addInputField(fieldName) {
       const inputContainer = document.querySelector(`#${fieldName}-inputs`);
-  
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('mt-2', 'flex', 'items-center'); 
-  
-      const newInput = document.createElement('input');
-      newInput.type = 'text';
+
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("mt-2", "flex", "items-center");
+
+      const newInput = document.createElement("input");
+      newInput.type = "text";
       newInput.name = fieldName;
       newInput.required = true;
-      newInput.classList.add('flex-1', 'px-4', 'py-2', 'border', 'rounded', 'transition', 'duration-300', 'focus:border-blue-500', 'bg-black', 'text-white');
-  
-      const addButton = document.createElement('button');
-      addButton.type = 'button';
-      addButton.textContent = '+';
-      addButton.classList.add('ml-2', 'px-4', 'py-2', 'bg-blue-500', 'text-white', 'rounded', 'hover:bg-blue-600', 'transition', 'duration-300');
+      newInput.classList.add(
+        "flex-1",
+        "px-4",
+        "py-2",
+        "border",
+        "rounded",
+        "transition",
+        "duration-300",
+        "focus:border-blue-500",
+        "bg-black",
+        "text-white"
+      );
+
+      const addButton = document.createElement("button");
+      addButton.type = "button";
+      addButton.textContent = "+";
+      addButton.classList.add(
+        "ml-2",
+        "px-4",
+        "py-2",
+        "bg-blue-500",
+        "text-white",
+        "rounded",
+        "hover:bg-blue-600",
+        "transition",
+        "duration-300"
+      );
       addButton.onclick = function () {
         addInputField(fieldName);
       };
-  
-      const deleteButton = document.createElement('button');
-      deleteButton.type = 'button';
-      deleteButton.textContent = '-';
-      deleteButton.classList.add('ml-2', 'px-4', 'py-2', 'bg-red-500', 'text-white', 'rounded', 'hover:bg-red-600', 'transition', 'duration-300');
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.textContent = "-";
+      deleteButton.classList.add(
+        "ml-2",
+        "px-4",
+        "py-2",
+        "bg-red-500",
+        "text-white",
+        "rounded",
+        "hover:bg-red-600",
+        "transition",
+        "duration-300"
+      );
       deleteButton.onclick = function () {
         inputContainer.removeChild(wrapper);
       };
-  
+
       wrapper.appendChild(newInput);
-      wrapper.appendChild(addButton); 
+      wrapper.appendChild(addButton);
       wrapper.appendChild(deleteButton);
-  
+
       inputContainer.appendChild(wrapper);
     }
-  </script> 
-  
-  
+  </script>
 
-{% endblock%}
+  {% endblock%}
+</body>
+
