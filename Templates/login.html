@@ -132,9 +132,8 @@
 </html> -->
 
 
-<!DOCTYPE html>
-<html data-theme="dark">
-<head>
+{% extends "base.html" %}
+  {% block head %}
   <title>LOGIN</title>
   <style>
     * {
@@ -143,15 +142,14 @@
       box-sizing: border-box;
     }
     body {
-      display: flex;
-      flex-direction: column; /* Added */
-      justify-content: space-between; /* Added */
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background-color: rgb(36,41,51);
     }
     .container {
-      width: 500px;
+      /* display: flex; */
+      flex-direction: column; /* Added */
+      justify-content: space-between; /* Added */
+      font-family: Arial, sans-serif;
+      background-color: rgb(36,41,51);
+      /* width: 100px; */
       margin: 100px auto;
       padding: 40px;
       background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
@@ -263,10 +261,17 @@ p{
   }
 
   </style>
-</head>
-<body>
-  <div class="container">
+              {% endblock %}
+              {% block content %}
+  <div class="container md:w-[500] w-full">
     <h2>LOGIN</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="text-white bg-red-500">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
     <form action="/login" method="POST">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -277,15 +282,12 @@ p{
         <input type="password" id="password" name="password" required>
       </div>
       <div class="form-group">
-        <a href="/landing" role="button">Login</a>
-        <!-- <button><a href="/landing" class="button-link">Login</a></button> -->
+        <button type="submit">Login</button>
+        <!-- a href="/landing" role="button">Login</a -->
+        <!-- <button>Login</button> -->
       </div>
       <a href="/signup" class="link">New Here? SignUp</a>
     </form>
   </div>
 
-  <footer style="text-align: center; margin-bottom: 20px; color: #fff;">
-    &copy; 2023 All rights reserved by Microsoft Innovation Club Vit Chennai
-  </footer>
-</body>
-</html>
+  {% endblock %}
