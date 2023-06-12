@@ -7,17 +7,15 @@
       padding: 0;
       box-sizing: border-box;
     }
-    body {
-    }
     .container1 {
-      /* display: flex; */
+      display: flex;
       flex-direction: column; 
       justify-content: space-between; 
-      min-height: 100vh;
+      min-height: 60vh;
       font-family: Arial, sans-serif;
       background-color: rgb(36,41,51);
       width: 500px;
-      margin: 30px auto;
+      margin: 60px auto;
       padding: 40px;
       background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       border-radius: 10px;
@@ -25,7 +23,7 @@
       text-align: center;
       position: relative;
     }
-    .container:before {
+    .container1:before {
       content: "";
       position: absolute;
       top: -5px;
@@ -116,7 +114,7 @@
   }
 
   .link:hover {
-    /* color: aqua; */
+    color: aqua;
     font-size: 1.2em;
     animation: bounce 0.3s;
   }
@@ -132,12 +130,38 @@
       transform: scale(1);
     }
   }
+
+  
+  .form-group button {
+    display: block;
+    width: 420px;
+    padding: 12px;
+    background-color: rgb(5, 170, 170);; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+
+  .form-group button:hover {
+    background-color: #007fff;
+    transform: translateY(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(30, 144, 255, 0.6); 
+  }
+
+  
   </style>
             {% endblock %}
 
 {% block content %}
   
-  <div class="container1 md:w-[500] w-full">
+<div class="container1 md:w-[500] w-full" style="position: relative;">
     <h2>SIGNUP</h2>
     {% with messages = get_flashed_messages() %}
 {% if messages %}
@@ -165,7 +189,6 @@
       </div>
       <div class="form-group">
         <button type="submit">Sign Up</button>
-        <!-- <a href="/login" role="button">Sign Up</a> -->
       </div>
       <a href="/login" class="link">Already a member? Login</a>
     </form>
