@@ -12,7 +12,7 @@ gunicorn==20.1.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.2
-numpy==1.24.1
+numpy==1.21.6
 open-python==1.1.1
 opencv-python==4.7.0.72
 paho-mqtt==1.6.1
