@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Landing Page - Certificate Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .gradient-text {
+      background: linear-gradient(45deg, #6243ff, #ad005f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hidden {
+      display: none;
+    }
+    body {
+      background: linear-gradient(to bottom, #000000, #130F40);
+    }
+  </style>
+  <script>
+    function toggleLoginButtons() {
+      var loginButton = document.getElementById("loginButton");
+      var adminLoginButton = document.getElementById("adminLoginButton");
+      var userLoginButton = document.getElementById("userLoginButton");
+      var banners = document.getElementById("banners");
+
+      if (loginButton.style.display === "none") {
+        loginButton.style.display = "block";
+        adminLoginButton.style.display = "none";
+        userLoginButton.style.display = "none";
+        banners.style.display = "none";
+      } else {
+        loginButton.style.display = "none";
+        adminLoginButton.style.display = "inline-block";
+        userLoginButton.style.display = "inline-block";
+        banners.style.display = "block";
+      }
+    }
+  </script>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+  <div class="text-center">
+    <div class="title">
+      <h1 class="text-9xl gradient-text font-bold uppercase">Certificate</h1>
+      <h1 class="text-9xl gradient-text font-bold uppercase">Generator</h1>
+    </div>
+    <p class="text-xl text-white">Accreditation at your fingertips. Success at your command.</p>
+    <button id="loginButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-8" onclick="toggleLoginButtons()">Get Started!</button>
+    <div id="banners" class="hidden mt-8">
+      <button id="adminLoginButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
+        <a href="{{ url_for('adminlogin') }}">Admin Login</a>
+      </button>
+      <button id="userLoginButton" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+         <a href="{{ url_for('userlogin') }}">User Login</a>
+      </button>
+    </div>
+  </div>
+</body>
+</html>
