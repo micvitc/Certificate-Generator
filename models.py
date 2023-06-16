@@ -15,6 +15,5 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     event_name = db.Column(db.String(50))
     brandings = db.Column(db.String(50))
-    authorized_signatory = db.Column(db.String(50))
     participants = db.Column(db.String(200))
     winners = db.Column(db.String(200))

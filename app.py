@@ -28,7 +28,7 @@ def dash():
 def create_event():
     event_name = request.form.get('event_name')
     brandings = request.form.get('brandings')
-
+    
     # Save certificate templates
     certificate_design_participation = request.files['certificate_design_participation']
     certificate_design_winner = request.files['certificate_design_winner']
