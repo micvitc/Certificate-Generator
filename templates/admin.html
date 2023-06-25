@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page - Certificate Generator</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(45deg, #000000, #130F40);
+      color: #ffffff;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      background-color: transparent;
+      z-index: 1;
+    }
+
+    .navbar button {
+      margin-left: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: transparent;
+      color: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .user-row:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+      <a href="{{ url_for('usersignup') }}" class="navbar-link"><button>Create new User</button></a>
+      <a href="{{ url_for('adminsignup') }}" class="navbar-link"><button>Create new Admin</button></a>
+      <a href="{{ url_for('mainpage') }}" class="navbar-link"><button>Generate Certificate</button></a>
+    </nav>
+  
+<main class="flex-center items-center m-20">
+    <div class="flex-2">
+      <div class="mx-auto my-8 p-8 bg-black-200 rounded-2xl">
+        <h2 class="text-2xl font-bold uppercase italic text-center">User Data</h2>
+        
+        <table class="w-full mt-6 border-collapse">
+          <thead>
+            <tr>
+              <th class="p-3 font-bold uppercase bg-purple-200 text-gray-600 border border-gray-300 hidden lg:table-cell">User</th>
+              <th class="p-3 font-bold uppercase bg-purple-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Password</th>
+              <th class="p-3 font-bold uppercase bg-purple-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+              <tr class="user-row hover:bg-transparent border-b border-gray-200 py-10">
+                <td class="p-3 text-white-600 border border-gray-300 hidden lg:table-cell">{{ user.username }}</td>
+                <td class="p-3 text-white-600 border border-gray-300 hidden lg:table-cell">{{ user.password }}</td>
+                <td class="p-3 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                  <form action="{{ url_for('delete_user') }}" method="POST">
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <button type="submit" class="text-red-600">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
