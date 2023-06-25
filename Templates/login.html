@@ -1,157 +1,19 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+  {% block head %}
   <title>LOGIN</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background-color: #000;
     }
     .container {
-      width: 500px;
-      margin: 0 auto;
-      padding: 40px;
-      background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      position: relative;
-    }
-    .container:before {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
-      z-index: -1;
-      filter: blur(20px);
-    }
-    h2 {
-      text-align: center;
-      font-size: 28px;
-      color: #fff;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #fff;
-      text-align: left;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: border-color 0.3s ease;
-      background-color: #000;
-      color: #fff;
-    }
-
-    .form-group input:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: glowing-border 1.5s infinite;
-}
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #1effe9;
-      border-width: 5px;
-    }
-    .form-group button {
-  width: 100%;
-  padding: 12px;
-  background-color: #1e90ff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 16px;
-}
-
-.form-group button:hover {
-  background-color: #007fff;
-  transform: translateY(5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: glowing-border 1.5s infinite;
-}
-
-@keyframes glowing-border {
-  0% {
-    box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(30, 144, 255, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
-  }
-}
-
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>LOGIN</h2>
-    <form action="/login" method="POST">
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="form-group">
-        <button type="submit">Login</button>
-      </div>
-    </form>
-  </div>
-</body>
-</html> -->
-
-
-<!DOCTYPE html>
-<html data-theme="dark">
-<head>
-  <title>LOGIN</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      display: flex;
+      /* display: flex; */
       flex-direction: column; /* Added */
       justify-content: space-between; /* Added */
-      min-height: 100vh;
       font-family: Arial, sans-serif;
       background-color: rgb(36,41,51);
-    }
-    .container {
-      width: 500px;
+      /* width: 100px; */
       margin: 100px auto;
       padding: 40px;
       background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
@@ -262,11 +124,41 @@ p{
     animation: bounce 0.3s;
   }
 
+  .form-group button {
+    display: block;
+    width: 420px;
+    padding: 12px;
+    background-color: rgb(5, 170, 170); /* Apply the aqua color here */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition for background color and box shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+
+  .form-group button:hover {
+    background-color: #007fff;
+    transform: translateY(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(30, 144, 255, 0.6); /* Add glowing border effect */
+  }
+
   </style>
-</head>
-<body>
-  <div class="container">
+              {% endblock %}
+              {% block content %}
+  <div class="container md:w-[500] w-full">
     <h2>LOGIN</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="text-white bg-red-500">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
     <form action="/login" method="POST">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -277,15 +169,17 @@ p{
         <input type="password" id="password" name="password" required>
       </div>
       <div class="form-group">
-        <a href="/landing" role="button">Login</a>
-        <!-- <button><a href="/landing" class="button-link">Login</a></button> -->
+        <button type="submit">Login</button>
       </div>
       <a href="/signup" class="link">New Here? SignUp</a>
     </form>
   </div>
-
-  <footer style="text-align: center; margin-bottom: 20px; color: #fff;">
-    &copy; 2023 All rights reserved by Microsoft Innovation Club Vit Chennai
-  </footer>
-</body>
-</html>
+  <div flex flex-col h-screen justify-between>
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content h-10 text-slate-100 font-medium">
+      <div>
+        <p>Copyright &copy; 2023 - All right reserved by Microsoft Innovations Club VIT Chennai</p>
+      </div>
+    </footer>
+  </div>
+  
+  {% endblock %}

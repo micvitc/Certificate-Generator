@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}       
+{% block head %}
   <title>SIGNUP</title>
   <style>
     * {
@@ -8,17 +7,15 @@
       padding: 0;
       box-sizing: border-box;
     }
-    body {
+    .container1 {
       display: flex;
       flex-direction: column; 
       justify-content: space-between; 
-      min-height: 100vh;
+      min-height: 60vh;
       font-family: Arial, sans-serif;
       background-color: rgb(36,41,51);
-    }
-    .container {
       width: 500px;
-      margin: 30px auto;
+      margin: 60px auto;
       padding: 40px;
       background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       border-radius: 10px;
@@ -26,7 +23,7 @@
       text-align: center;
       position: relative;
     }
-    .container:before {
+    .container1:before {
       content: "";
       position: absolute;
       top: -5px;
@@ -117,7 +114,7 @@
   }
 
   .link:hover {
-    /* color: aqua; */
+    color: aqua;
     font-size: 1.2em;
     animation: bounce 0.3s;
   }
@@ -133,11 +130,46 @@
       transform: scale(1);
     }
   }
+
+  
+  .form-group button {
+    display: block;
+    width: 420px;
+    padding: 12px;
+    background-color: rgb(5, 170, 170);; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+
+  .form-group button:hover {
+    background-color: #007fff;
+    transform: translateY(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(30, 144, 255, 0.6); 
+  }
+
+  
   </style>
-</head>
-<body>
-  <div class="container">
+            {% endblock %}
+
+{% block content %}
+  
+<div class="container1 md:w-[500] w-full" style="position: relative;">
     <h2>SIGNUP</h2>
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="text-white bg-red-500">
+        {{ messages[0] }}. Go to <a class="text-blue-600" href="{{ url_for('auth.login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
     <form action="/signup" method="POST">
       <div class="form-group">
         <label for="name">Name:</label>
@@ -148,22 +180,25 @@
         <input type="email" id="email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="register-number">Register Number:</label>
-        <input type="text" id="register-number" name="register-number" required>
+        <label for="register_number">Register Number:</label>
+        <input type="text" id="register_number" name="register_number" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
       </div>
       <div class="form-group">
-        <!--button><a href="/login">Sign Up</a></button-->
-        <a href="/login" role="button">Sign Up</a>
+        <button type="submit">Sign Up</button>
       </div>
       <a href="/login" class="link">Already a member? Login</a>
     </form>
   </div>
-  <footer style="text-align: center; margin-bottom: 20px; color: #fff;">
-    &copy; 2023 All rights reserved by Microsoft Innovation Club Vit Chennai
-  </footer>
-</body>
-</html>
+
+  <div flex flex-col h-screen justify-between>
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content h-10 text-slate-100 font-medium">
+      <div>
+        <p>Copyright &copy; 2023 - All right reserved by Microsoft Innovations Club VIT Chennai</p>
+      </div>
+    </footer>
+  </div>
+  {% endblock %}

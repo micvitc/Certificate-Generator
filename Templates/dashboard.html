@@ -1,230 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        display: flex;
-        flex-direction: column; 
-        justify-content: space-between; 
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background-color: rgb(36,41,51);
-      }
-      .container {
-        width: 500px;
-        margin: 100px auto;
-        padding: 40px;
-        background: radial-gradient(circle, rgba(23, 23, 23, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        position: relative;
-      }
-      .container:before {
-        content: "";
-        position: absolute;
-        top: -5px;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-        background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
-        z-index: -1;
-        filter: blur(20px);
-      }
-      h2 {
-        text-align: center;
-        font-size: 28px;
-        color: #fff;
-        margin-bottom: 30px;
-        text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
-      }
-      .form-group {
-        margin-bottom: 20px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: bold;
-        color: #fff;
-        text-align: left;
-      }
-      .form-group input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-        background-color: #000;
-        color: #fff;
-      }
-      .form-group input:hover {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        animation: glowing-border 1.5s infinite;
-      }
-      .form-group input:focus {
-        outline: none;
-        border-color: #1effe9;
-        border-width: 5px;
-      }
-      .form-group button {
-        width: 100%;
-        padding: 12px;
-        background-color: #1e90ff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 16px;
-      }
-      .form-group button:hover {
-        background-color: #007fff;
-        transform: translateY(5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        animation: glowing-border 1.5s infinite;
-      }
-      @keyframes glowing-border {
-        0% {
-          box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
-        }
-        50% {
-          box-shadow: 0 0 20px rgba(30, 144, 255, 0.6);
-        }
-        100% {
-          box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
-        }
-      }
-      p {
-        color: white;
-      }
-      .link {
-        text-decoration: none;
-        color: white;
-        transition: color 0.3s ease, font-size 0.3s ease;
-      }
-      .link:hover {
-        font-size: 1.2em;
-        animation: bounce 0.3s;
-      }
-      .input-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .input-group input {
-        flex: 1;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-        background-color: #000;
-        color: #fff;
-        margin-bottom: 10px;
-      }
-      .input-group button {
-        background-color: #1e90ff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 16px;
-        margin-left: 10px;
-        padding: 10px;
-        margin-top: 10px;
-        align-self: flex-start;
-      }
-      .input-group button:hover {
-        background-color: #007fff;
-        transform: translateY(5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        animation: glowing-border 1.5s infinite;
-      }
+{% extends "dash.html"%} {% block content%}
+<body class="bg-gray-800 text-white min-h-screen">
+  <div class="container mx-auto px-2 py-4">
+    <h2 class="text-center text-3xl font-semibold mb-6">CREATE NEW EVENT</h2>
+    <form action="/create_event" method="POST" enctype="multipart/form-data" id="create_event_form">
+      <div class="mb-6">
+        <label for="event_name" class="block font-semibold mb-2">Event Name:</label>
+        <input
+          type="text"
+          id="event_name"
+          name="event_name"
+          required
+          class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+        />
+      </div>
 
-    </style>
-</head>
-<body>
-    <div class="container">
-      <h2>Create New Event</h2>
-      <form action="/create_event" method="POST">
-        <div class="form-group">
-          <label for="event-name">Event Name:</label>
-          <input type="text" id="event-name" name="event_name" required>
-        </div>
-              
-        <div class="form-group">
-          <label for="brandings">Brandings:</label>
-          <input type="text" id="brandings" name="brandings" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="authorized-signatory">Authorized Signatory:</label>
-          <input type="file" id="authorized-signatory" name="authorized_signatory" required>
-        </div>              
-  
-        <div class="form-group">
-          <label for="participants">Participants:</label>
-          <div class="input-group">
-            <input type="text" id="participants" name="participants" required>
-            <button type="button" onclick="addInputField('participants')">+</button>
+      <div class="mb-6">
+        <label for="brandings" class="block font-semibold mb-2">Brandings:</label>
+        <input
+          type="text"
+          id="brandings"
+          name="brandings"
+          required
+          class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+        />
+      </div>
+      
+      <div class="mb-6">
+        <label for="certificate_design_participation" class="block font-semibold mb-2">Participation Certificate Template:</label>
+        <input
+          type="file"
+          id="certificate_design_participation"
+          name="certificate_design_participation"
+          required
+          class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label for="certificate_design_winner" class="block font-semibold mb-2">Winner Certificate Template:</label>
+        <input
+          type="file"
+          id="certificate_design_winner"
+          name="certificate_design_winner"
+          required
+          class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label for="participants" class="block font-semibold mb-2">Participants:</label>
+        <div id="participants-inputs">
+          <div class="flex items-center">
+            <input
+              type="text"
+              name="participants"
+              required
+              class="flex-1 px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+            />
+            <button
+              type="button"
+              onclick="addInputField('participants')"
+              class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            >
+              +
+            </button>
           </div>
         </div>
-                
-        <div class="form-group">
-          <label for="winners">Winners:</label>
-          <div class="input-group">
-            <input type="text" id="winners" name="winners" required>
-            <button type="button" onclick="addInputField('winners')">+</button>
+      </div>
+
+      <div class="mb-6">
+        <label for="winners" class="block font-semibold mb-2">Winners:</label>
+        <div id="winners-inputs">
+          <div class="flex items-center">
+            <input
+              type="text"
+              name="winners"
+              required
+              class="flex-1 px-4 py-2 border rounded focus:outline-none focus:border-blue-500 bg-black text-white"
+            />
+            <button
+              type="button"
+              onclick="addInputField('winners')"
+              class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            >
+              +
+            </button>
           </div>
         </div>
-  
-        <div class="form-group">
-            <button type="submit">CREATE</button>
-          </div>
-      </form>
+      </div>
+
+    
+    <div class="mb-6">
+      <button
+        type="submit"
+        class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 font-semibold uppercase tracking-wide"
+      >
+        CREATE
+    </button>
     </div>
-  
-    <script>
-      function addInputField(fieldName) {
-        const formGroup = document.querySelector(`#${fieldName}`).closest('.form-group');
-        const inputGroup = formGroup.querySelector('.input-group');
-        const newInput = document.createElement('input');
-        newInput.type = 'text';
-        newInput.name = fieldName;
-        newInput.required = true;
-  
-        const deleteButton = document.createElement('button');
-        deleteButton.type = 'button';
-        deleteButton.textContent = '-';
-        deleteButton.onclick = function () {
-          inputGroup.removeChild(newInput);
-          inputGroup.removeChild(deleteButton);
-        };
-  
-        inputGroup.insertBefore(newInput, inputGroup.lastElementChild);
-        inputGroup.insertBefore(deleteButton, inputGroup.lastElementChild);
-      }
-    </script>
+  </form>
+  </div>
+  <script type="text/javascript">
+    $(document).on('submit','#create_event_form',function(e)
+                   {
+      console.log('hello');
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/create_event',
+        data:{
+          event_name:$("#event_name").val(),
+          brandings:$("#brandings").val(),
+          certificate_design_participation:$("#certificate_design_participation").val(),
+          certificate_design_winner:$("#certificate_design_winner").val(),
+          participants:$("#participants").val(),
+          winners:$("#winners").val()
+        },
+        success:function()
+        {
+          alert('saved');
+        }
+      })
+    });
+  </script>
+  <script>
+    function addInputField(fieldName) {
+      const inputContainer = document.querySelector(`#${fieldName}-inputs`);
 
-    <footer style="text-align: center; margin-bottom: 20px; color: #fff;">
-      &copy; 2023 All rights reserved by Microsoft Innovation Club Vit Chennai
-    </footer>
-  </body>
-</html>
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("mt-2", "flex", "items-center");
+
+      const newInput = document.createElement("input");
+      newInput.type = "text";
+      newInput.name = fieldName;
+      newInput.required = true;
+      newInput.classList.add(
+        "flex-1",
+        "px-4",
+        "py-2",
+        "border",
+        "rounded",
+        "focus:outline-none",
+        "focus:border-blue-500",
+        "bg-black",
+        "text-white"
+      );
+
+      const addButton = document.createElement("button");
+      addButton.type = "button";
+      addButton.textContent = "+";
+      addButton.classList.add(
+        "ml-2",
+        "px-4",
+        "py-2",
+        "bg-blue-500",
+        "text-white",
+        "rounded",
+        "hover:bg-blue-600",
+        "transition",
+        "duration-300"
+      );
+      addButton.onclick = function () {
+        addInputField(fieldName);
+      };
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.textContent = "-";
+      deleteButton.classList.add(
+        "ml-2",
+        "px-4",
+        "py-2",
+        "bg-red-500",
+        "text-white",
+        "rounded",
+        "hover:bg-red-600",
+        "transition",
+        "duration-300"
+      );
+      deleteButton.onclick = function () {
+        inputContainer.removeChild(wrapper);
+      };
+
+      wrapper.appendChild(newInput);
+      wrapper.appendChild(addButton);
+      wrapper.appendChild(deleteButton);
+
+      inputContainer.appendChild(wrapper);
+    }
+  </script>
+  {% endblock%}
+</body>
+
